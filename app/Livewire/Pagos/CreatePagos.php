@@ -121,10 +121,6 @@ class CreatePagos extends Component
 
             $this->validate($this->Rules());
             
-          /*   $afiliado = Afiliado::where('documento', $this->documento)->get();
-            dd($afiliado); */
-            //$pago = Pago::where('periodo', );
-
             $ncodigo = Pago::latest()->first();
 
             if($ncodigo){
@@ -139,8 +135,16 @@ class CreatePagos extends Component
            
             $peridod = Pago::where('afiliado_id', $afiliado[0]->id) ->get();
         
+            //validaciones
             if($peridod[0]->periodo ?? ""){
                  LivewireAlert::title('¡Periodo ya Pagado!')
+                ->success()
+                ->show();
+                return;
+            }
+
+            if(empty($this->documento)){
+                 LivewireAlert::title('¡Documento Obligatorio!')
                 ->success()
                 ->show();
                 return;
