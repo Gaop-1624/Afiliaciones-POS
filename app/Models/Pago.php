@@ -15,6 +15,7 @@ class Pago extends Model
             'fecha_pago',
             'user_id',
             'periodo',
+            'nplanilla'
     ];
 
    //Relacion uno a muchos con la tabla afiliado

@@ -31,7 +31,7 @@
         <x-titulo><i class="fas fa-user-plus fa-fw"></i> &nbsp; {{__('New User')}}</x-titulo>
     </x-card2>
     <x-card>
-         <div class="grid grid-cols-1 gap-1 lg:grid-cols-2 lg:gap-2 m-2 mb-4 py-2">
+            <div class="grid grid-cols-1 gap-1 lg:grid-cols-2 lg:gap-2 m-2 mb-4 py-2">
                 @if ($errors->first('name')) 
                     <div class="px-4 py-2 border bg-slate-100">
                         <div class="relative mb-4">

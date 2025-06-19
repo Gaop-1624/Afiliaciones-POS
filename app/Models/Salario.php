@@ -9,7 +9,7 @@ class Salario extends Model
     protected $table = 'salarios';
 
      protected $fillable = [
-        'nombre',
+        'salario',
         'año',
         'administracion',
         'afiliado_id'

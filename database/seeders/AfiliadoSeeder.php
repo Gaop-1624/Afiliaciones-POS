@@ -22,9 +22,9 @@ class AfiliadoSeeder extends Seeder
         $afiliado1->celular = "3228466724";
         $afiliado1->email = 'kronos1624@yahoo.es';
         $afiliado1->fecha_nac = "1973-03-08";
-        $afiliado1->salario = "1423500";
+      //  $afiliado1->salario = "1423500";
         $afiliado1->sexo = "1";
-        $afiliado1->riesgo = "4";
+        $afiliado1->riesgo = "0.0435";
         $afiliado1->ciudad_id = "1";
         $afiliado1->eps_id = "15";
         $afiliado1->afp_id = "2";

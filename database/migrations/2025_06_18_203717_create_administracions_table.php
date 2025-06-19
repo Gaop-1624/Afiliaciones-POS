@@ -11,13 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('salarios', function (Blueprint $table) {
+        Schema::create('administracions', function (Blueprint $table) {
             $table->id();
-            $table->double('salario');
+            $table->double('administracion');
             $table->string('año');
-          // $table->double('administracion');
-            $table->foreignId('afiliado_id')->constrained()->on('afiliados')->nullable();
-
+            $table->foreignId('empresa_id')->constrained()->on('empresas')->nullable();
             $table->timestamps();
         });
     }
@@ -27,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('salarios');
+        Schema::dropIfExists('administracions');
     }
 };

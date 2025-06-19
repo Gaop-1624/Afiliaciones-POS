@@ -264,7 +264,7 @@
                 </div>
             @endif
         <div class="flex items-center border bg-slate-100 px-4">
-            <input wire:model.fill="caja" {{ $this->caja = 1 ? 'checked' : ''}} id="link-checkbox" type="checkbox" value="1" class="w-4 h-4 text-blue-600 bg-white border-gray-600 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+            <input wire:model.fill="caja_id" {{ $this->caja = 1 ? 'checked' : ''}} id="link-checkbox" type="checkbox" value="1" class="w-4 h-4 text-blue-600 bg-white border-gray-600 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
             <label for="link-checkbox" class="ms-2 text-xs font-bold text-green-600 dark:text-green-600">{{__('Compensation Box')}} </label>
         </div>
         </div>

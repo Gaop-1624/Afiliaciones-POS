@@ -15,9 +15,8 @@ class SalarioSeeder extends Seeder
     public function run(): void
     {
         $salario1 = new Salario();
-        $salario1->nombre = "1423500";
+        $salario1->salario = "1423500";
         $salario1->año = "2025";
-        $salario1->administracion = "40000";
         $salario1->afiliado_id = "1";
         $salario1->save();
     }

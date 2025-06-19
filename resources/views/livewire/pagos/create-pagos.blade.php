@@ -31,6 +31,12 @@
     <div class="grid grid-cols-2 gap-2 lg:grid-cols-3 lg:gap-2 m-2">
         <div class="col-span-2">
              <x-card3>
+                @if ($errors->any())
+                    <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+                <span class="font-medium"></span> {{$errors->first('documento')}}
+                </div>
+                @endif
+
                  <div class="grid grid-cols-2 gap-2 lg:grid-cols-3 lg:gap-2 m-2">
                     <div class="col-span-2">
                         <div class="justify-center border bg-stone-100 shadow-lg col-span-3 px-4 py-2 h-12 m-2">
@@ -41,9 +47,9 @@
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
                                     </svg>
                                 </div>
-                                <input wire:model="documento" wire:keydown.enter="ScanningCode($event.target.value)" id="documento" type="text" class="h-8 block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" autocomplete="off"  placeholder="{{__('Search Document...')}}" required />
-                                <p class="mt-2 text-xs text-red-600">{{$errors->first('documento')}} </p>
-                            </div>
+                                <input wire:model="documento" wire:keydown.enter="ScanningCode($event.target.value)" id="documento" value="{{old('documento')}}"  type="text" class="h-8 block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" autocomplete="off"  placeholder="{{__('Search Document...')}}" required />
+{{--                                 <p class="mt-2 text-xs text-red-600">{{$errors->first('documento')}} </p>
+ --}}                            </div>
                         </div>
                     </div>
                     <div class="py-5">
@@ -65,6 +71,7 @@
                             </tr>
                         </thead>
                         <tbody>
+                            
                             @foreach ($cart as $item)
                                 <tr>
                                     <td class="py-2 px-1 font-sans text-xs text-left">{{$item['documento']}}</td>
@@ -114,7 +121,7 @@
                         </div>
                    </div>
                     <div class="flex justify-end border-x-0 mb-4">
-                        <button wire:click.prevent="Create()" class="px-6 py-1 mr-2 h-8 text-xs font-semibold text-center inline-flex items-center text-white bg-blue-700 rounded-lg hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300"><i class="fas fa-save fa-stack fa-lg"></i>{{__('Save')}} </button>
+                        <button wire:click.prevent="Create()" class="px-6 py-1 mr-2 h-8 text-xs font-semibold text-center inline-flex items-center text-white bg-blue-700 rounded-lg hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300"><i class="far fa-money-bill-alt"></i> &nbsp; {{__('Pay')}} </button>
                         <button wire:click.prevent="Cancelar()" class="px-6 py-1 mr-2 h-8 text-xs font-semibold text-center inline-flex items-center text-white bg-slate-500 rounded-lg hover:bg-slate-600 hover:text-white focus:ring-4 focus:outline-none focus:ring-slate-300"><i class="fas fa-window-close fa-stack fa-lg"></i>{{__('Cancel')}} </button>
                     </div>
                      

@@ -2,8 +2,10 @@
 
 namespace App\Livewire\Pagos;
 
+use App\Models\Administracion;
 use App\Models\Afiliado;
 use App\Models\Pago;
+use App\Models\Salario;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
@@ -33,7 +35,8 @@ class CreatePagos extends Component
         $this->cart = new Collection;
         $this->save();
         $this->dispatch('refresh');
-        $this->redirect('/Pagos/Pagos/Create');
+       // $this->redirectRoute('Pagos.Pagos.Create');
+       $this->redirect('/Pagos/Pagos/Create');
         
     }
 
@@ -50,29 +53,39 @@ class CreatePagos extends Component
     }
 
     public function AddAfiliado($afiliado){
-    // 
+            // validacion
             if($this->intCart($afiliado->id)){
                 return;
             }
+      
+            $salarios = Salario::find($afiliado->id);
+            $administracion = Administracion::all();
+            $ano = now()->year;
+            
+            if($salarios->año = $ano){
+                $salario = $salarios->salario;
+            }
+            
+            if($administracion[0]->año = $ano){
+                $adm = $administracion[0]->administracion;
+            } 
 
-         
-            $salario = $afiliado->salario;
-            $adm = 40000;
-           
             $eps = 0.04;
 
-            if($afiliado->afp_id){
+            if($afiliado->afp_id == 10){
+                $Vlrafp = 0;
+            }else{
                 $afp = 0.16;
                 $Vlrafp = $salario * $afp;
-            }else{
-                $Vlrafp = 0;
             }
 
-            if($afiliado->caja){
+            if($afiliado->caja = 1){
                 $caja = 0.04;
                 $Vlrcaja = $salario * $caja;
+              
             }else{
                 $Vlrcaja = 0;
+                
             }
             
             $riesgo = $afiliado->riesgo;
@@ -111,8 +124,8 @@ class CreatePagos extends Component
     public function Rules(){
         return [
                 'documento' => [
-                    'required',
-                    'numeric',
+                'required',
+                'numeric',
                 ]
         ];
     }
@@ -128,7 +141,7 @@ class CreatePagos extends Component
             }else{
                 $codigo = 1;
             } 
-        
+                    
             $codigo1 = str_pad($codigo, 4, '0', STR_PAD_LEFT);
             
             $afiliado = Afiliado::where('documento', $this->documento)->get();
@@ -138,13 +151,6 @@ class CreatePagos extends Component
             //validaciones
             if($peridod[0]->periodo ?? ""){
                  LivewireAlert::title('¡Periodo ya Pagado!')
-                ->success()
-                ->show();
-                return;
-            }
-
-            if(empty($this->documento)){
-                 LivewireAlert::title('¡Documento Obligatorio!')
                 ->success()
                 ->show();
                 return;
@@ -162,6 +168,7 @@ class CreatePagos extends Component
                   'fecha_pago' => now(),
                   'periodo' => $perido,
                   'user_id' => $user,
+                  'nplanilla' => 1,
             ]); 
 
             LivewireAlert::title('¡Pago Realizado!')
@@ -178,7 +185,7 @@ class CreatePagos extends Component
             return $cont > 0 ? true : false;
     }
 
-     public function mount(){
+    public function mount(){
         if(session()->has('cart')){
             $this->cart = session('cart');
         } else {

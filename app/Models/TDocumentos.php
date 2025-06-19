@@ -10,4 +10,8 @@ class TDocumentos extends Model
     public function empresa(){
         return $this->hasMany(Empresa::class);
     }
+
+    public function afiliado(){
+        return $this->hasMany(Afiliado::class, 'afiliado_id');
+    }
 }

@@ -7,15 +7,17 @@ use App\Models\Afp;
 use App\Models\Arl;
 use App\Models\Ciudad;
 use App\Models\Ep;
+use App\Models\Salario;
 use App\Models\TDocumentos;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 use Jantinnerezo\LivewireAlert\Facades\LivewireAlert;
 use Livewire\Component;
 
 class CreateAfiliado extends Component
 {
-    public $TDocumentos, $Ciudades, $caja, $clienteid, $fecha_nac, $sexo, $caja_id;
+    public $TDocumentos, $Ciudades, $caja, $clienteid, $fecha_nac, $sexo, $caja_id, $salario;
     public $nombre, $documento, $tdocumento, $direccion, $telefono, $celular, $email, $ciudad_id, $id;
     public $empresa_id, $user, $arl_id, $Arl, $empresa, $userid, $riesgo, $eps_id, $Eps, $afp_id, $Afps;
 
@@ -72,6 +74,10 @@ class CreateAfiliado extends Component
             'riesgo' => [
                   'required',
             ], 
+            'salario' => [
+                  'required',
+                  'numeric'
+            ], 
         ];
     }
 
@@ -84,32 +90,52 @@ class CreateAfiliado extends Component
         }else{
             $caja = 3;
         }
+        
+        DB::beginTransaction();
+            try { 
+              $afiliado =  Afiliado::updateOrCreate(
+                    ['id' => $this->clienteid], 
+                    [
+                        'tdocumento' => $this->tdocumento,
+                        'documento' => $this->documento,
+                        'nombre' => $this->nombre,
+                        'fecha_nac' => $this->fecha_nac,
+                        'direccion' => $this->direccion, 
+                        'telefono' => $this->telefono,
+                        'celular' => $this->celular,
+                        'ciudad_id' => $this->ciudad_id,
+                        'email' => $this->email,
+                        'user_id' => $user,
+                        'eps_id' => $this->eps_id,
+                        'afp_id' => $this->afp_id,
+                        'sexo' => $this->sexo,
+                        'caja_id' => $caja,
+                        'riesgo' => $this->riesgo,
+                      
+                    ]);
 
-        Afiliado::updateOrCreate(
-            ['id' => $this->clienteid], 
-            [
-            'tdocumento' => $this->tdocumento,
-            'documento' => $this->documento,
-            'nombre' => $this->nombre,
-            'fecha_nac' => $this->fecha_nac,
-            'direccion' => $this->direccion, 
-            'telefono' => $this->telefono,
-            'celular' => $this->celular,
-            'ciudad_id' => $this->ciudad_id,
-            'email' => $this->email,
-            'user_id' => $user,
-            'eps_id' => $this->eps_id,
-            'afp_id' => $this->afp_id,
-            'sexo' => $this->sexo,
-            'caja_id' => $caja,
-            'riesgo' => $this->riesgo
-        ]);
+                    Salario::create([
+                        'salario' => $this->salario,
+                        'año' => now()->year,
+                        'afiliado_id' => $afiliado->id
+                    ]); 
 
-        LivewireAlert::title('¡Afiliado Creado!')
-        ->success()
-        ->show();
+                           
+                    LivewireAlert::title('¡Afiliado Creado!')
+                    ->success()
+                    ->show();
+                    $this->redirectRoute('Afiliaciones.Afiliados');
 
-        $this->redirectRoute('Afiliaciones.Afiliados');
+          } catch (\Throwable $th) {
+                    DB::rollBack();
+                    LivewireAlert::title('¡Error al Crear al Afiliado!')
+                        ->Error()
+                        ->timer(3000)
+                        ->show();
+            }
+           
+        DB::commit();
+        
      }
 
     public function mount()

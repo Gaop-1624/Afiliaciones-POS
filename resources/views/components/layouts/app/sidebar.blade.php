@@ -12,7 +12,7 @@
             </a>
 
             <flux:navlist variant="outline">
-                <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>Dashboard</flux:navlist.item>
+                    <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>Dashboard</flux:navlist.item>
                     @can('admin.empresa.edit')
                         <flux:navlist.group :heading="__('Administrators')" class="grid"></flux:navlist.group> 
                         <flux:navlist.item icon="building-office" :href="route('Empresas.Configurar')" :current="request()->routeIs('Empresas.Configurar')" wire:navigate>{{ __('Company') }}</flux:navlist.item>
@@ -27,10 +27,25 @@
                         <flux:navlist.group :heading="__('Affiliations')" class="grid"></flux:navlist.group> 
                         <flux:navlist.item icon="battery-50" :href="route('Afiliaciones.Afiliados')" :current="request()->routeIs('Afiliaciones.Afiliados', 'Afiliaciones.Afiliados.Create', 'Afiliaciones.Afiliados.Edit')" wire:navigate>{{ __('Affiliates') }}</flux:navlist.item>
                     @endcan
-                     @can('admin.afiliados.index')
-                        <flux:navlist.group :heading="__('Payments')" class="grid"></flux:navlist.group> 
+                    @can('admin.afiliados.index')
                         <flux:navlist.item icon="credit-card" :href="route('Pagos.Pagos')" :current="request()->routeIs('Pagos.Pagos', 'Pagos.Pagos.Create', 'Pagos.Pagos.Edit')" wire:navigate>{{ __('Payments') }}</flux:navlist.item>
                     @endcan
+                     @can('admin.afiliados.index')
+                        <flux:navlist.item icon="banknotes" :href="route('Admin.Gastos')" :current="request()->routeIs('Admin.Gastos', 'Pagos.Pagos.Create', 'Pagos.Pagos.Edit')" wire:navigate>{{ __('Bills') }}</flux:navlist.item>
+                    @endcan
+                    @can('admin.afiliados.index')
+                        <flux:navlist.item icon="newspaper" :href="route('Admin.Planillas')" :current="request()->routeIs('Admin.Planillas', 'Pagos.Pagos.Create', 'Pagos.Pagos.Edit')" wire:navigate>{{ __('Worksheets') }}</flux:navlist.item>
+                    @endcan 
+                     @can('admin.afiliados.index')
+                       <flux:navlist.item icon="scale" :href="route('Cierre.Cierres')" :current="request()->routeIs('Cierre.Cierres', 'Pagos.Pagos.Create', 'Pagos.Pagos.Edit')" wire:navigate>{{ __('Movements') }}</flux:navlist.item>
+                    @endcan
+                    @can('admin.afiliados.index')
+                        <flux:navlist.item icon="bolt" :href="route('Pagos.Pagos')" :current="request()->routeIs('Pagos.Pagos', 'Pagos.Pagos.Create', 'Pagos.Pagos.Edit')" wire:navigate>{{ __('Reports') }}</flux:navlist.item>
+                    @endcan
+                    
+                    
+                   
+                   
                     {{--    <flux:navlist.group  expandable heading="Administradores" class="hidden lg:grid">
                     <flux:navlist.item href="#">{{ __('Company') }}</flux:navlist.item>
                     <flux:navlist.item href="#">{{ __('Users') }}</flux:navlist.item>

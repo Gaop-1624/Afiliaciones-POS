@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('email', 100)->nullable();
             $table->date('fecha_nac')->nullable();
             $table->integer('sexo')->nullable();
-            $table->double('salario');
+          //  $table->double('salario');
             $table->double('riesgo', 20);
             $table->integer('status')->default(0);//0 Ingreso 1 Activo 2 Retirado
             $table->foreignId('ciudad_id')->constrained()->on('ciudads')->nullable();

@@ -11,14 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pagos', function (Blueprint $table) {
+        Schema::create('gastos', function (Blueprint $table) {
             $table->id();
-            $table->string('codigo');
-            $table->string('total_pagado');
+            $table->string('detalle');
+            $table->string('total_gasto');
             $table->date('fecha_pago');
-            $table->string('periodo');
-            $table->string('nplanilla')->nullable();
-            $table->foreignId('afiliado_id')->constrained()->on('afiliados')->nullable();
+         //   $table->foreignId('empresa_id')->constrained()->on('empresas')->nullable();
             $table->foreignId('user_id')->constrained()->on('users')->nullable();
             $table->timestamps();
         });
@@ -29,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pagos');
+        Schema::dropIfExists('gastos');
     }
 };

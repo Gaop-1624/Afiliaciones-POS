@@ -16,7 +16,7 @@ use Livewire\Component;
 class EditAfiliado extends Component
 {
     public $afiliadoid, $afiliado;
-    public $TDocumentos, $Ciudades, $caja, $clienteid, $fecha_nac, $sexo;
+    public $TDocumentos, $Ciudades, $caja_id, $clienteid, $fecha_nac, $sexo, $caja;
     public $nombre, $documento, $tdocumento, $direccion, $telefono, $celular, $email, $ciudad_id, $id;
     public $empresa_id, $user, $arl_id, $Arl, $empresa, $userid, $riesgo, $eps_id, $Eps, $afp_id, $Afps;
 
@@ -79,6 +79,13 @@ class EditAfiliado extends Component
      public function create(Afiliado $afiliado){
         $this->validate($this->Rules());
         $user = Auth::user()->id;
+
+        if($this->caja_id == "true"){
+            $caja = 1;
+        }else{
+            $caja = 3;
+        }
+
         $afiliado = Afiliado::updateOrCreate(
             ['id' => $this->afiliadoid], 
             [
@@ -95,7 +102,7 @@ class EditAfiliado extends Component
             'eps_id' => $this->eps_id,
             'afp_id' => $this->afp_id,
             'sexo' => $this->sexo,
-            'caja' => $this->caja,
+            'caja' => $caja,
             'riesgo' => $this->riesgo
         ]);
 

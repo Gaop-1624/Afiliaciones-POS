@@ -156,7 +156,7 @@
             @endif 
             
         </div>
-        <div class="grid grid-cols-2 gap-1 lg:grid-cols-6 lg:gap-2 mb-1  m-2">
+        <div class="grid grid-cols-2 gap-1 lg:grid-cols-7 lg:gap-2 mb-1  m-2">
             @if ($errors->first('email')) 
                 <div class="px-1 py-2 border bg-slate-100 h-12 col-span-2">
                     <div class="relative mb-4">
@@ -189,6 +189,24 @@
                     </div> 
                 </div>
             @endif 
+
+            @if ($errors->first('salario')) 
+                <div class="px-1 py-2 border bg-slate-100">
+                    <div class="relative mb-4">
+                        <input wire:model="salario" id="salario" type="text" class="font-semibold bg-red-50 border border-red-500 text-red-900 placeholder-red-700 text-sm rounded focus:ring-red-500 focus:border-red-500 block w-full p-2.5 h-8" placeholder=" " />
+                        <label for="celular" class="absolute text-sm text-red-700 duration-300 transform -translate-y-3 scale-75 top-1 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-red-600 peer-focus:dark:text-red-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-1 peer-focus:scale-75 peer-focus:-translate-y-3 start-1 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto font-bold">{{__('salary')}}</label>
+                        <p class="mt-2 text-xs text-red-600">{{$errors->first('salario')}} </p>
+                    </div>
+                </div>
+            @else
+                <div class="px-1 py-2 border bg-slate-100 h-12">
+                    <div class="relative mb-4">
+                        <input wire:model="salario" id="salario" type="text" class="font-semibold block px-2.5 pb-1.5 pt-3 w-full text-xs text-gray-500 bg-white rounded h-8 border-1 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
+                        <label for="salario" class="absolute text-xs text-green-500 duration-300 transform -translate-y-3 scale-75 top-1 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-1 peer-focus:scale-75 peer-focus:-translate-y-3 start-1 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto font-bold">{{__('salary')}}</label>
+                    </div> 
+                </div>
+            @endif 
+
             <div class="flex items-center">
                 <input wire:model="sexo" id="default-radio-1" type="radio" value="1" name="default-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                 <label for="default-radio-1" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{__('Female')}}</label>
@@ -243,11 +261,11 @@
                 <div class="px-4 py-2 border bg-slate-100 h-12">
                     <select wire:model="riesgo" class="js-example-basic-single block w-full p-2 text-xs text-red-900 border border-red-300 rounded bg-red-50 focus:ring-red-500 focus:border-red-500">
                         <option selected>{{__('Risks (ARL))')}}</option>
-                        <option value="1">0,52%</option>
-                        <option value="2">1,044%</option>
-                        <option value="3">2,44%</option>
-                        <option value="4">4,35%</option>
-                        <option value="5">6,96%</option> 
+                        <option value="0.0052">1 - Oficina</option>
+                        <option value="0.01044">2 - Campo</option>
+                        <option value="0.0243">3 - Mecanicos</option>
+                        <option value="0.0435">4 - Conductores</option>
+                        <option value="0.696">5 - Construcción</option> 
                     </select>
                     <p class="mt-2 text-xs text-red-600">{{$errors->first('riesgo')}} </p>
                 </div>

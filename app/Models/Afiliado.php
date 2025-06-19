@@ -15,13 +15,13 @@ class Afiliado extends Model
         'ciudad_id', 'tdocumento',
         'eps_id', 'arl_id',
         'afp_id', 'caja_id',
-        'riesgo', 'estado', 
+        'riesgo', 'estado', 'salario',
         'fecha_nac', 'sexo', 'user_id'
     ];
 
     //Relacion uno a uno con la tabla tipo documento
-    public function tipodocumentos(){
-        return $this->belongsTo(TDocumentos::class);
+    public function tdocumentos(){
+        return $this->belongsTo(TDocumentos::class, 'tdocumento', 'id');
     }
 
     //Relacion uno a uno con la tabla Eps

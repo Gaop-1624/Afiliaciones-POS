@@ -364,6 +364,26 @@
     "Search Document...": "Buscar por Documento...",
     "Document": "Documento",
     "Range": "Rango",
-    "No contributions": "Sin Aportes"
-    
+    "No contributions": "Sin Aportes",
+    "salary": "Salario",
+    "Movements": "Movimientos",
+    "Closures": "Cierres",
+    "Balance sheets": "Balances",
+    "Income and Expenses": "Ingresos y Gastos",
+    "Worksheets": "Planillas",
+    "Daily Closing": "Cierre Diario",
+    "Monthly Closing": "Cierre Mensual",
+    "Bills": "Gastos",
+    "New Expenses": "Gasto Nuevo",
+    "Total Expenses": "Total Gasto",
+    "Expenses Detail": "Detalles del Gasto",
+    "Update Expense": "Actualizar Gasto",
+    "List of forms": "Listado de Planillas",
+    "Trigger": "Generar",
+    "New Form": "Nueva Planilla",
+    "There are no forms": "No Existen Planillas",
+    "Refresh": "Refrescar",
+    "print": "Imprimir",
+    "Download Form": "Descargar Planilla",
+    "Pay": "Pagar"
 }
